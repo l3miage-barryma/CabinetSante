@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<med:cabinet xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+            xmlns:med="http://www.ujf-grenoble.fr/l3miage/medical"
+            xsi:schemaLocation='http://www.ujf-grenoble.fr/l3miage/medical ./cabinet.xsd'>
+    <med:nom>
+        Soins à Grenoble
+    </med:nom>
+    
+    <med:adresse>
+        <med:numéro>60</med:numéro>
+        <med:rue>rue de la Chimie</med:rue>
+        <med:ville>Grenoble</med:ville>
+        <med:codePostal>38041</med:codePostal>
+    </med:adresse>
+    
+    <med:infirmiers>
+        <med:infirmier id="001">
+            <med:nom>Fréchie</med:nom>
+            <med:prénom>Sarah</med:prénom>
+            <med:photo>sarah.png</med:photo>
+        </med:infirmier>
+        <med:infirmier id="002">
+            <med:nom>Stické</med:nom>
+            <med:prénom>Sophie</med:prénom>
+            <med:photo>sophie.jpg</med:photo>
+        </med:infirmier>
+        <med:infirmier id="003">
+            <med:nom>Ochon</med:nom>
+            <med:prénom>Paul</med:prénom>
+            <med:photo>paul.png</med:photo>
+        </med:infirmier>
+    </med:infirmiers>
+    
+    <med:patients>
+        <med:patient>
+            <!-- Homme, né en août 98 en France, à Marseille (n° 55 en Bouches du Rhône) 458e naissance -->
+            <med:nom>Alécole</med:nom>
+            <med:prénom>Yvon</med:prénom>
+            <med:sexe>M</med:sexe>
+            <med:naissance>1998-08-22</med:naissance>
+            <med:numéro>198081305545892</med:numéro>
+            <med:adresse>
+                <med:étage>6</med:étage>
+                <med:numéro>50</med:numéro>
+                <med:rue>avenue Félix Viallet</med:rue>
+                <med:ville>Grenoble</med:ville>
+                <med:codePostal>38031</med:codePostal>
+            </med:adresse>
+            <med:visite date="2015-12-08" intervenant="001">
+                <med:acte id="109"/>
+            </med:visite>
+        </med:patient>
+        
+        <med:patient>
+            <med:nom>Orouge</med:nom>
+            <med:prénom>Elvire</med:prénom>
+            <med:sexe>F</med:sexe>
+            <med:naissance>1982-03-08</med:naissance>
+            <med:numéro>282036902305218</med:numéro>
+            <med:adresse>
+                <med:rue>Rond-Point de la Croix de Vie</med:rue>
+                <med:ville>La Tronche</med:ville>
+                <med:codePostal>38700</med:codePostal>
+            </med:adresse>
+            <med:visite date="2015-12-08">
+                <med:acte id="300"/>
+            </med:visite>
+        </med:patient>
+        
+        <med:patient>
+            <med:nom>Pien</med:nom>
+            <med:prénom>Oscare</med:prénom>
+            <med:sexe>F</med:sexe>
+            <med:naissance>1975-03-25</med:naissance>
+            <med:numéro>275037306569202</med:numéro>
+            <med:adresse>
+                <med:rue>rue Casimir Brenier</med:rue>
+                <med:ville>Grenoble</med:ville>
+                <med:codePostal>38000</med:codePostal>
+            </med:adresse>
+            <med:visite date="2015-12-08" intervenant="001" >
+                <med:acte id="101"/>
+                <med:acte id="104"/>
+            </med:visite>
+        </med:patient>
+        
+        <med:patient>
+            <med:nom>Kapoëtla</med:nom>
+            <med:prénom>Xavier</med:prénom>
+            <med:sexe>M</med:sexe>
+            <med:naissance>2011-08-02</med:naissance>
+            <med:numéro>111083306303521</med:numéro>
+            <med:adresse>
+                <med:numéro>25</med:numéro>
+                <med:rue>rue des Martyrs</med:rue>
+                <med:ville>Grenoble</med:ville>
+                <med:codePostal>38042</med:codePostal>
+            </med:adresse>
+            <med:visite date="2015-12-08">
+                <med:acte id="111"/>
+            </med:visite>
+        </med:patient>
+    </med:patients>
+</med:cabinet>

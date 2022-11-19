@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:med="http://www.ujf-grenoble.fr/l3miage/medical"
+           targetNamespace="http://www.ujf-grenoble.fr/l3miage/medical"
+           elementFormDefault="qualified">
+    
+    <xs:element name="cabinet" type="med:Cabinet" >
+        <xs:unique name="infUnique">
+            <xs:selector xpath="med:infirmiers/med:infirmier" />
+            <xs:field xpath="@id" />
+        </xs:unique>
+        <xs:keyref name="refInfirmier" refer="med:infUnique">
+            <xs:selector xpath="med:patients/med:patient/med:visite" />
+            <xs:field xpath="@intervenant" />
+        </xs:keyref>
+        
+    </xs:element>
+    
+    <xs:complexType name="Cabinet">
+        <xs:sequence>
+            <xs:element name="nom" type="xs:string" />
+            <xs:element name="adresse" type="med:Adresse" />
+            <xs:element name="infirmiers" type="med:Infirmiers" />
+            <xs:element name="patients" type="med:Patients" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Adresse et sous-types -->
+    <xs:complexType name="Adresse">
+        <xs:sequence>
+            <xs:element name="étage" type="xs:int" minOccurs="0"/>
+            <xs:element name="numéro" type="med:Numéro" minOccurs="0"/>
+            <xs:element name="rue" type="xs:string" />
+            <xs:element name="ville" type="xs:string" />
+            <xs:element name="codePostal" type="med:CodePostal" />
+        </xs:sequence> 
+    </xs:complexType>
+    
+    <xs:simpleType name="Numéro">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{1,4}([A-Z]|bis|ter|quater)?" />
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="CodePostal" >
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{5}" /> <!-- string plutôt que int pour garder le 0 initial -->
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Infirmiers et sous-types -->
+    <xs:complexType name="Infirmiers">
+        <xs:sequence>
+            <xs:element name="infirmier" type="med:Infirmier" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="Infirmier">
+        <xs:sequence>
+            <xs:element name="nom" type="xs:string" />
+            <xs:element name="prénom" type="xs:string" />
+            <xs:element name="photo" type="med:Fichier" />
+        </xs:sequence>
+        <xs:attribute name="id" type="med:IdInfirmier" />
+    </xs:complexType>
+    
+    <xs:simpleType name="Fichier">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\w+\.\w{1,4}" />
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="IdInfirmier">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{3}" />
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Patients et sous-types -->
+    <xs:complexType name="Patients">
+        <xs:sequence>
+            <xs:element name="patient" type="med:Patient" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- type Patient -->
+    <xs:complexType name="Patient">
+        <xs:sequence>
+            <xs:element name="nom" type="xs:string" />
+            <xs:element name="prénom" type="xs:string" />
+            <xs:element name="sexe" type="med:Sexe" />
+            <xs:element name="naissance" type="xs:date" />
+            <xs:element name="numéro" type="med:NumSécu" />
+            <xs:element name="adresse" type="med:Adresse" />
+            <xs:element name="visite" type="med:Visite" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:simpleType name="Sexe">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="M"/>
+            <xs:enumeration value="F" />
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="NumSécu" >
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(1|2)\d{14}" />
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:complexType name="Visite" >
+        <xs:sequence>
+            <xs:element name="acte" type="med:Acte" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="date" type="xs:date" />
+        <xs:attribute name="intervenant" type="med:IdInfirmier" />
+    </xs:complexType>
+    
+    <xs:complexType name="Acte">
+        <xs:attribute name="id" type="xs:int" />
+    </xs:complexType>
+    
+        
+</xs:schema>
